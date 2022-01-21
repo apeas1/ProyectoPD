@@ -1,6 +1,7 @@
 import Test.QuickCheck
 import Data.List
 import qualified Data.Map as Map
+import qualified Data.Set as Set
 -- Relacionar artistas entre si por los usuarios que les escuchan
 -- Lista de artistas
 
@@ -40,7 +41,7 @@ dicEnComun xs ys = Map.fromList (zip xs ys)
 filtrado m = Map.keys (Map.filter (>0.3) m )
 
 --Esto nos devuelve un diccionario de un artista y sus artistas relacionados a partir de un diccionario de un artista y sus oyentes
-relaciones m = [(k, filtrado (dicEnComun (delete k ks) (comparacionOyentes e (delete e es)))) | (k,e) <- (Map.toList m)]
+relaciones m = Map.fromList [(k, filtrado (dicEnComun (delete k ks) (comparacionOyentes e (delete e es)))) | (k,e) <- (Map.toList m)]
     where ks = Map.keys m
           es = Map.elems m
 
@@ -51,3 +52,6 @@ relaciones m = [(k, filtrado (dicEnComun (delete k ks) (comparacionOyentes e (de
 -- A partir de este diccionario y del diccionario que relaciona artistas devolver una lista con los artistas recomendados
 
 recomendados m1 m2 = undefined
+
+obtenerRelacionados  xs m2 = concat [v | (k,v) <- (Map.toList m2), (elem k xs)] 
+
