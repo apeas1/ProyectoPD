@@ -1,3 +1,6 @@
+module Proyecto.Recomendacionporartista
+()where
+
 import Test.QuickCheck
 import Data.List
 import qualified Data.Map as Map
