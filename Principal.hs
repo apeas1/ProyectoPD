@@ -1,7 +1,8 @@
 import System.IO
 import System.Directory
 import Control.Exception (catch, SomeException)
--- import Proyecto.Recomendacionporartista
+import ProyectoPD.Recomendacionporartista
+import ProyectoPD.Data.Lectorcsv
 
 main :: IO ()
 main = do
@@ -14,8 +15,8 @@ main = do
   o <- getChar 
   if o == '1' then do 
       putStrLn "Opción 1: "
-  if o == '2' then do 
+  else if o == '2' then do 
       putStrLn "Opción 2: "
-      lector
+      ---lector
   else do 
       putStrLn "Otra opción"
