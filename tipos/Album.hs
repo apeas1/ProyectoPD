@@ -4,11 +4,11 @@ module Tipos.Album
 import Tipos.Song
 import Tipos.Artist
 
-data Album = Album {name :: String,
+data Album = Album {nameAl :: String,
                     artists :: [Artist],
-                    genres :: [String],
+                    genresAl :: [String],
                     label :: String,
-                    popularity :: Int,
+                    popularityAl :: Int,
                     number_tracks :: Int,
                     tracks :: [Song]
                     }deriving (Show)

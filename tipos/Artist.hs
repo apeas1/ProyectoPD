@@ -4,6 +4,6 @@ Artist
 
 data Artist = Artist {  name :: String,
                         popularity :: Int,
-                        genres :: [Int],
+                        genres :: [String],
                         followers :: Int
                         }deriving (Show)

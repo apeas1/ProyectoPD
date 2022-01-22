@@ -1,3 +1,7 @@
+module Tipos.Usuario
+(Song
+)where
+
 import Tipos.Song
 import Tipos.Artist
 import Tipos.Album
