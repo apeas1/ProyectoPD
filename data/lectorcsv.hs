@@ -1,3 +1,7 @@
+module ProyectoPD.Lectorcsv
+(lector
+)where
+
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveGeneric #-}
@@ -41,7 +45,7 @@ instance DefaultOrdered Song where
   headerOrder _ = header ["title",  "artist",  "genre",  "year", "bpm", "energy", 
                           "danceability", "dB", "liveness", "valence", "duration", "acoustic"]
 
-main :: IO ()
+lector :: IO ()
 main = do
     f <- BL.readFile "file.csv"
     case decodeByName f of
