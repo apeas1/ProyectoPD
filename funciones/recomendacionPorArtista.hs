@@ -1,4 +1,4 @@
-module Proyecto.Recomendacionporartista
+module Funciones.Recomendacionporartista
 ()where
 
 import Test.QuickCheck
