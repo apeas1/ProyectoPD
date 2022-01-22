@@ -1,4 +1,4 @@
-module ProyectoPD.Data.Lectorcsv
+module Data.Lectorcsv
 (lector
 )where
 

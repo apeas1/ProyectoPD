@@ -1,5 +1,5 @@
--- module Proyecto.Recomendacionporartista
--- ()where
+module Funciones.Recomendacionporartista
+()where
 
 import Test.QuickCheck
 import Data.List

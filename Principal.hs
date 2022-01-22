@@ -1,8 +1,8 @@
 import System.IO
 import System.Directory
 import Control.Exception (catch, SomeException)
-import ProyectoPD.Recomendacionporartista
-import ProyectoPD.Data.Lectorcsv
+import Funciones.Recomendacionporartista
+---import Data.Lectorcsv
 
 main :: IO ()
 main = do
