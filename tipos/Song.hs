@@ -1,4 +1,4 @@
-module Song
+module Tipos.Song
 (Song
 )where
 

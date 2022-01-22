@@ -1,5 +1,5 @@
-import Song
-import Artist
+import Tipos.Song
+import Tipos.Artist
 
 data Playlist = Playlist {  name :: String,
                             genres :: [String],

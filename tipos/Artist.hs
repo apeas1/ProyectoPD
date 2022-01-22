@@ -1,4 +1,4 @@
-module Artist(
+module Tipos.Artist(
 Artist
 )where
 

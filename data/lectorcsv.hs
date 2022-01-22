@@ -46,7 +46,7 @@ instance DefaultOrdered Song where
                           "danceability", "dB", "liveness", "valence", "duration", "acoustic"]
 
 lector :: IO ()
-main = do
+lector = do
     f <- BL.readFile "file.csv"
     case decodeByName f of
         Left err      -> print err

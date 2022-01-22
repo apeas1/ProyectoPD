@@ -1,5 +1,8 @@
-import Song
-import Artist
+module Tipos.Album
+(Album
+)where
+import Tipos.Song
+import Tipos.Artist
 
 data Album = Album {name :: String,
                     artists :: [Artist],
