@@ -9,10 +9,13 @@ main = do
   putStrLn "Bienvenido a nuestro programa de recomendación de música"
   putStrLn "Que desea hacer ?"
   putStrLn "1. recomendar por artista"
-  putStrLn "2. ...."
+  putStrLn "2. recomendar canciones"
   putStrLn "3. ...."
   o <- getChar 
   if o == '1' then do 
       putStrLn "Opción 1: "
+  if o == '2' then do 
+      putStrLn "Opción 2: "
+      lector
   else do 
       putStrLn "Otra opción"
