@@ -2,11 +2,11 @@ module Tipos.Playlist(Playlist (..)
 )where
 
 import Tipos.Song
-import Tipos.Artist
+-- import Tipos.Artist
 
 data Playlist = Playlist {  nameP :: String,
                             genresP :: [String],
-                            artistsP :: [Artist],
+                            artistsP :: [String],
                             num_tracks :: Int,
-                            tracksP :: [Song]
+                            tracksP :: [String]
                             }deriving (Show)

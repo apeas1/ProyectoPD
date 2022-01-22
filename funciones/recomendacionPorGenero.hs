@@ -8,17 +8,23 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 -- Recomendación por género -- 
+recPorGenero users songs = parsearFinal (relMeta ma mb mc)
+    where ma = dictUsCa users
+          mb = convertirEnMap users 
+          mc = dictGenCa (listaGen canciones) songs
 -- Crear una playlist por género que escucha cada usuario
 
 -- Géneros que escucha un usuario
-
+ma = dictUsCa usuarios
+mb = convertirEnMap usuarios 
+mc = dictGenCa (listaGen canciones) canciones
 -- Hace falta sacar un diccionario de [(usuarioID, [cancion])] de un usuario con los géneros que escucha
-parUsCa (User id s ar al) = (id, Set.toList setG)
+parUsGe (User id s _ _) = (id, Set.toList setG)
     where setG = Set.fromList (map (getGen) s)
 
 getGen (Song a b ge d e f g h i j k l) = ge
 
-convertirEnMap xs = Map.fromList [parUsCa x | x <- xs]
+convertirEnMap xs = Map.fromList [parUsGe x | x <- xs]
 
 -- Canciones de un género 
 -- Desde la lista de canciones, una lista de géneros
@@ -29,6 +35,23 @@ listaGen xs = Set.toList  $Set.fromList [ getGen x | x<- xs]
 dictGenCa gs cs = Map.fromList [(g,( filter (\x -> (p x g)) cs)) | g <- gs ]
     where p x y = (getGen x) ==y
 
+-- Crear una playlist por género por usuario
+
+-- Para eso es necesario una relación [(usuario, [(genero, [canciones])])] filtrando las canciones que el usuario ya escucha 
+-- Así que también necesitamos un diccionario de usuarios con las canciones que escucha
+dictUsCa xs = Map.fromList [(id, s) | (User id s _ _) <- xs]
+--Entrada: una lista de canciones, una lista de géneros, y un map [(género, [canción])]
+dictPorUsuario xs  g m2 = [(x, y\\xs)| (x, y) <-l2, elem x g]
+    where l2 =  Map.toList m2
+-- Entrada: map [(usuario, [canción])], map [(usuario, [género])], map [(género, [canción])]
+relMeta m1 m2 m3 = Map.fromList [(u,(dictPorUsuario (m1 Map.! u) (m2 Map.! u) m3)) | u <- uID ]
+    where uID = Map.keys m1
+
+-- Construcción de una playist { nameP = género, genresP =[género], artistsP = [], num_tracks = contar tracksP , tracksP = [lista canciones]}
+
+datosPorPlaylist ps = [Playlist { nameP=k, genresP = [k], artistsP = (map (\(Song _ a _ _ _ _ _ _ _ _ _ _ ) -> a) v), num_tracks= (length v), tracksP=(map (\(Song t _ _ _ _ _ _ _ _ _ _ _ ) -> t) v) } | (k, v) <- ps, v/=[]]
+parsearFinal m = [(u, datosPorPlaylist k) | (u, k) <- Map.toList m]
+
 a = Artist { name = "AA", popularity = 30, genres =["pop"], followers= 3}
 b = Artist { name = "BB", popularity = 30, genres = ["pop"], followers = 3}
 c = Artist { name = "CC", popularity = 30, genres = ["rock"], followers = 4}
@@ -36,8 +59,6 @@ d = Artist { name = "DD", popularity = 30, genres = ["rock", "pop"], followers =
 
 al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s1] }
 al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s2] }
-s1 = Song {title="ho", artist="AA", genre="pop", year=2000, bpm=39, energy=22, danceability=8, dB=22, liveness=1, valence=2, duration=4, acoustic=9}
-s2 = Song {title="n", artist="BB", genre="pop", year=1990, bpm=100, energy=52, danceability=8, dB=22, liveness=1, valence=4, duration=3, acoustic=5}
 cans = [s1, s2]
 us1 = User 1 [s189,s200, s190, s191, s195] [a, b, c, d] [al1]
 us2 = User 2 [s190,s191, s192, s193] [a, b] [al1]
