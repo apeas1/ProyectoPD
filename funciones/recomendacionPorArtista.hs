@@ -1,62 +1,28 @@
 module Funciones.Recomendacionporartista
 ()where
 
--- import Tipos.Usuario
--- import Tipos.Song
--- import Tipos.Artist
--- import Tipos.Album
--- import Test.QuickCheck
+import Tipos.Usuario
+import Tipos.Song
+import Tipos.Artist
+import Tipos.Album
+import Test.QuickCheck
 import Data.List
 import qualified Data.Map as Map
 import qualified Data.Set as Set
 
-
-data Artist = Artist {  name1 :: String,
-                        popularity1 :: Int,
-                        genres1 :: [String],
-                        followers :: Int
-                        }deriving (Show)
-                        
-data Album = Album {name2 :: String,
-                    artists :: [Artist],
-                    genres :: [String],
-                    label :: String,
-                    popularity :: Int,
-                    number_tracks :: Int,
-                    tracks :: [Song]
-                    }deriving (Show)
-
-data Song = Song {  title :: String,
-                    artist :: String,
-                    genre :: String,
-                    year :: String,
-                    bpm :: Int,
-                    energy :: Int,
-                    danceability :: Int,
-                    dB :: Int,
-                    liveness :: Int, --probabilidad de que haya una audiencia en la cancion
-                    valence :: Int, --cuanto mayor el valor mayor positividad en tono de la cancion
-                    duration :: Int,
-                    acoustic :: Int
-                    }deriving (Eq, Show, Read)
-
-data User = User { userId :: Int,
-                   favsongs :: [Song],
-                   favartists :: [Artist],
-                   favalbums :: [Album]}
 -- Relacionar artistas entre si por los usuarios que les escuchan
 -- Lista de artistas
 -----------------------------------------------------------------------------------------------------------------------------------------
 --                                     La función recomendados ejecuta el resto del archivo                                            --
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-a = Artist { name1 = "AA", popularity1 = 30, genres1 =["pop"], followers= 3}
-b = Artist { name1 = "BB", popularity1 = 30, genres1 = ["pop"], followers = 3}
-c = Artist { name1 = "CC", popularity1 = 30, genres1 = ["rock"], followers = 4}
-d = Artist { name1 = "DD", popularity1 = 30, genres1 = ["rock", "pop"], followers = 3}
+a = Artist { name = "AA", popularity = 30, genres =["pop"], followers= 3}
+b = Artist { name = "BB", popularity = 30, genres = ["pop"], followers = 3}
+c = Artist { name = "CC", popularity = 30, genres = ["rock"], followers = 4}
+d = Artist { name = "DD", popularity = 30, genres = ["rock", "pop"], followers = 3}
 
-al1 = Album {name2= "e", artists= [a], genres= ["pop"], label = "una", popularity = 23, number_tracks= 4, tracks= [s1] }
-al2 = Album {name2 = "a", artists= [b], genres= ["pop"], label = "una", popularity = 23, number_tracks= 4, tracks= [s2] }
+al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], label = "una", popularityAl = 23, number_tracks= 4, tracks= [s1] }
+al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], label = "una", popularityAl = 23, number_tracks= 4, tracks= [s2] }
 s1 = Song {title="ho", artist="AA", genre="pop", year="2000", bpm=39, energy=22, danceability=8, dB=22, liveness=1, valence=2, duration=4, acoustic=9}
 s2 = Song {title="n", artist="BB", genre="pop", year="1990", bpm=100, energy=52, danceability=8, dB=22, liveness=1, valence=4, duration=3, acoustic=5}
 
