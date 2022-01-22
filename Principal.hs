@@ -1,7 +1,7 @@
 import System.IO
 import System.Directory
 import Control.Exception (catch, SomeException)
-import Proyecto.Recomendacionporartista
+-- import Proyecto.Recomendacionporartista
 
 main :: IO ()
 main = do

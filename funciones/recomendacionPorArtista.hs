@@ -1,5 +1,5 @@
-module Proyecto.Recomendacionporartista
-()where
+-- module Proyecto.Recomendacionporartista
+-- ()where
 
 import Test.QuickCheck
 import Data.List
@@ -31,6 +31,9 @@ artistasUsuario (x:xs) aux
 
 -- ejemplos para probar
 m1 = Map.fromList [("BB",[1,4,2]),("AA",[1,2,3]), ("CC", [1, 8, 7, 6]), ("DD", [8, 7 , 9 , 1])]
+mU = Map.fromList [(1,["AA","BB","CC","DD"]), (2,["BB","AA"]), (3, ["AA"]), (4,["BB"]), (5,[]), (6, ["CC"]), (7, ["CC", "DD"]),(8, ["CC", "DD"]), (9,["DD"])] 
+l1 = ["AA", "BB","DD"]
+-- --------------------------------------------------------------------------------------------------------------------------
 oyentesIguales [] ys = 0
 oyentesIguales  (x:xs) ys
     | elem x ys = 1 + oyentesIguales xs ys
@@ -52,9 +55,9 @@ relaciones m = Map.fromList [(k, filtrado (dicEnComun (delete k ks) (comparacion
 
 -- Funcion que, devuelva un diccionario de un usuario y sus artistas preferidos
 
--- A partir de este diccionario y del diccionario que relaciona artistas devolver una lista con los artistas recomendados
+-- A partir de este diccionario y del diccionario que relaciona artistas devolver un diccionario de usuario con los artistas recomendados
 
-recomendados m1 m2 = undefined
+recomendados m1 m2 = Map.fromList [(k, obtenerRelacionados v m2) | (k,v) <- Map.toList m1 ]
 
-obtenerRelacionados  xs m2 = concat [v | (k,v) <- (Map.toList m2), (elem k xs)] 
+obtenerRelacionados  xs m = (Set.toList ( Set.fromList (concat [v | (k,v) <- (Map.toList m), (elem k xs)] ))) \\ xs
 
