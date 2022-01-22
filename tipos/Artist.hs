@@ -1,8 +1,4 @@
-module Tipos.Artist(
-name ,
-popularity ,
-genres ,
-followers
+module Tipos.Artist(Artist (..)
 )where
 
 data Artist = Artist {  name :: String,

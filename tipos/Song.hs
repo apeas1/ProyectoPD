@@ -1,11 +1,11 @@
 module Tipos.Song
-(Song
+(Song(..)
 )where
 
 data Song = Song {  title :: String,
                     artist :: String,
                     genre :: String,
-                    year :: String,
+                    year :: Int,
                     bpm :: Int,
                     energy :: Int,
                     danceability :: Int,

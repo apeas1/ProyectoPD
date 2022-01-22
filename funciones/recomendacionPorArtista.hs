@@ -1,10 +1,10 @@
 module Funciones.Recomendacionporartista
 ()where
 
-import Tipos.Usuario
-import Tipos.Song
-import Tipos.Artist
-import Tipos.Album
+import Tipos.Usuario (User(..))
+import Tipos.Song (Song(..))
+import Tipos.Artist(Artist(..))
+import Tipos.Album(Album(..))
 import Test.QuickCheck
 import Data.List
 import qualified Data.Map as Map
@@ -21,10 +21,10 @@ b = Artist { name = "BB", popularity = 30, genres = ["pop"], followers = 3}
 c = Artist { name = "CC", popularity = 30, genres = ["rock"], followers = 4}
 d = Artist { name = "DD", popularity = 30, genres = ["rock", "pop"], followers = 3}
 
-al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], label = "una", popularityAl = 23, number_tracks= 4, tracks= [s1] }
-al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], label = "una", popularityAl = 23, number_tracks= 4, tracks= [s2] }
-s1 = Song {title="ho", artist="AA", genre="pop", year="2000", bpm=39, energy=22, danceability=8, dB=22, liveness=1, valence=2, duration=4, acoustic=9}
-s2 = Song {title="n", artist="BB", genre="pop", year="1990", bpm=100, energy=52, danceability=8, dB=22, liveness=1, valence=4, duration=3, acoustic=5}
+al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s1] }
+al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s2] }
+s1 = Song {title="ho", artist="AA", genre="pop", year=2000, bpm=39, energy=22, danceability=8, dB=22, liveness=1, valence=2, duration=4, acoustic=9}
+s2 = Song {title="n", artist="BB", genre="pop", year=1990, bpm=100, energy=52, danceability=8, dB=22, liveness=1, valence=4, duration=3, acoustic=5}
 
 us1 = User 1 [s1,s2] [a, b, c, d] [al1]
 us2 = User 2 [s1,s2] [a, b] [al1]

@@ -1,9 +1,12 @@
+module Tipos.Playlist(Playlist (..)
+)where
+
 import Tipos.Song
 import Tipos.Artist
 
-data Playlist = Playlist {  name :: String,
-                            genres :: [String],
-                            artists :: [Artist],
+data Playlist = Playlist {  nameP :: String,
+                            genresP :: [String],
+                            artistsP :: [Artist],
                             num_tracks :: Int,
-                            tracks :: [Song]
+                            tracksP :: [Song]
                             }deriving (Show)

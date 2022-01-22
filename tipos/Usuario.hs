@@ -1,5 +1,5 @@
 module Tipos.Usuario
-(Song
+(User(..)
 )where
 
 import Tipos.Song
@@ -11,4 +11,4 @@ data User = User { userId :: Int,
                    favartists :: [Artist],
                    favalbums :: [Album]
 
-}
+}deriving (Show)
