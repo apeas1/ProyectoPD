@@ -7,6 +7,7 @@ import Tipos.Artist
 import Tipos.Album
 
 data User = User { userId :: Int,
+                   username :: String,
                    favsongs :: [Song],
                    favartists :: [Artist],
                    favalbums :: [Album]
