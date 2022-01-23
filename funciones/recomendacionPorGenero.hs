@@ -41,8 +41,11 @@ dictGenCa gs cs = Map.fromList [(g,( filter (\x -> (p x g)) cs)) | g <- gs ]
 -- Así que también necesitamos un diccionario de usuarios con las canciones que escucha
 dictUsCa xs = Map.fromList [(id, s) | (User id s _ _) <- xs]
 --Entrada: una lista de canciones, una lista de géneros, y un map [(género, [canción])]
-dictPorUsuario xs  g m2 = [(x, y\\xs)| (x, y) <-l2, elem x g]
-    where l2 =  Map.toList m2
+dictPorUsuario xs  g m2
+    | Map.null m2 = []
+    | elem (fst l) g = ((fst l), (snd l)\\xs): dictPorUsuario xs g (Map.fromList l2)
+    | otherwise = dictPorUsuario xs g (Map.fromList l2)
+    where (l:l2) =  Map.toList m2
 -- Entrada: map [(usuario, [canción])], map [(usuario, [género])], map [(género, [canción])]
 relMeta m1 m2 m3 = Map.fromList [(u,(dictPorUsuario (m1 Map.! u) (m2 Map.! u) m3)) | u <- uID ]
     where uID = Map.keys m1
@@ -57,9 +60,9 @@ b = Artist { name = "BB", popularity = 30, genres = ["pop"], followers = 3}
 c = Artist { name = "CC", popularity = 30, genres = ["rock"], followers = 4}
 d = Artist { name = "DD", popularity = 30, genres = ["rock", "pop"], followers = 3}
 
-al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s1] }
-al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s2] }
-cans = [s1, s2]
+al1 = Album {nameAl= "e", artists= [a], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s190] }
+al2 = Album {nameAl = "a", artists= [b], genresAl= ["pop"], labelAl = "una", popularityAl = 23, number_tracks= 4, tracks= [s200] }
+
 us1 = User 1 [s189,s200, s190, s191, s195] [a, b, c, d] [al1]
 us2 = User 2 [s190,s191, s192, s193] [a, b] [al1]
 us3 = User 3 [s193, s194, s195, s196, s200, s201] [a] [al2]
