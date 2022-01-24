@@ -23,35 +23,38 @@ main = do
   o <- getChar 
   getChar
   putStrLn ""
-  if o == '1' then do 
-      putStrLn "Opción 1: Recomendacion por artista \n"
-      putStrLn "Los artistas recomendados para cada usuario son : \n"
-      showRecomendados
-      putStrLn ""
-      putStrLn "Pulse c para volver al menu, de lo contrario se cerrará el pograma"
-      p <- getChar
-      getChar 
-      if p == 'c' then do
-          main
-      else do 
-          return () 
-  else if o == '2' then do 
-      putStrLn "Opción 2: Recomendacion por genero \n"
-      putStrLn "Los playlists recomendadas para cada usuario son : \n"
-      showRecomendadosGenero
-      putStrLn ""
-      putStrLn "Pulse c para volver al menu, de lo contrario se cerrará el pograma"
-      p <- getChar
-      getChar 
-      if p == 'c' then do
-          main
-      else do 
-          return () 
-  else if o == 'x' then do
-      return ()
-  else do 
-      putStrLn "Error"
-      main
+  case o of
+      '1' ->do 
+            putStrLn "Opción 1: Recomendacion por artista \n"
+            putStrLn "Los artistas recomendados para cada usuario son : \n"
+            showRecomendados
+            putStrLn ""
+            putStrLn "Pulse c para volver al menu, de lo contrario se cerrará el pograma"
+            p <- getChar
+            getChar 
+            case p of
+                'c' -> do
+                    main
+                _ -> do 
+                    return () 
+      '2' -> do 
+            putStrLn "Opción 2: Recomendacion por genero \n"
+            putStrLn "Los playlists recomendadas para cada usuario son : \n"
+            showRecomendadosGenero
+            putStrLn ""
+            putStrLn "Pulse c para volver al menu, de lo contrario se cerrará el pograma"
+            p <- getChar
+            getChar 
+            case p of
+                'c' -> do
+                    main
+                _ -> do 
+                    return () 
+      'x' -> do
+            return ()
+      _ ->  do 
+            putStrLn "Error"
+            main
   putStrLn " Hasta la próxima ! "
   _ <- getLine
   return ()
