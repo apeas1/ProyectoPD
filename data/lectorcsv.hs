@@ -11,7 +11,7 @@ import Data.List ()
 import Data.Text (Text)
 import Text.CSV ( parseCSVFromFile )
 import qualified Data.ByteString.Lazy as BL
-import Data.Csv
+import Data.CSV
 import System.Directory ( doesFileExist, canonicalizePath )
 ---import Proyecto.Tipos.Song as Song
 import GHC.Generics (Generic)

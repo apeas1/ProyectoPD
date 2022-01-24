@@ -8,7 +8,7 @@ import Tipos.Album
 import Tipos.Song
 import Tipos.Usuario
 import qualified Data.Map as Map
-import Data.Char
+-- import Data.Char
 import Control.Monad.Compat (forever)
 ---import Data.Lectorcsv
 

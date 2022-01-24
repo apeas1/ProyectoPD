@@ -12,6 +12,7 @@ import qualified Data.Map as Map
 import qualified Data.Set as Set
 
 -- Recomendación por género -- 
+recPorGenero :: [User] -> [Song] -> [(Int, [Playlist])]
 recPorGenero users songs = parsearFinal (relMeta ma mb mc)
     where ma = dictUsCa users
           mb = convertirEnMap users
@@ -25,9 +26,10 @@ showRecomendadosGenero = do
     let n = length lista
     showusersGenero n lista
 
+showusersGenero :: Show a => Int -> [a] -> IO ()
 showusersGenero n = showusersauxGenero n 0
 
-
+showusersauxGenero :: Show a => Int -> Int -> [a] -> IO ()
 showusersauxGenero n c lista = do
     if c == n then do
         return()
@@ -46,19 +48,23 @@ ma = dictUsCa usuarios
 mb = convertirEnMap usuarios
 mc = dictGenCa (listaGen canciones) canciones
 -- Hace falta sacar un diccionario de [(usuarioID, [cancion])] de un usuario con los géneros que escucha
+
+parUsGe :: User -> (Int, [String])
 parUsGe (User id _ s _ _) = (id, Set.toList setG)
     where setG = Set.fromList (map (getGen) s)
 
+getGen :: Song -> String
 getGen (Song a b ge d e f g h i j k l) = ge
 
+convertirEnMap :: [User] -> Map.Map Int [String]
 convertirEnMap xs = Map.fromList [parUsGe x | x <- xs]
 
 -- Canciones de un género 
 -- Desde la lista de canciones, una lista de géneros
-
+listaGen :: [Song] -> [String]
 listaGen xs = Set.toList  $Set.fromList [ getGen x | x<- xs]
 -- Un diccionario que relaciona género y canciones
-
+dictGenCa :: [[Char]] -> [Song] -> Map.Map [Char] [Song]
 dictGenCa gs cs = Map.fromList [(g,( filter (\x -> (p x g)) cs)) | g <- gs ]
     where p x y = (getGen x) ==y
 
@@ -66,20 +72,29 @@ dictGenCa gs cs = Map.fromList [(g,( filter (\x -> (p x g)) cs)) | g <- gs ]
 
 -- Para eso es necesario una relación [(usuario, [(genero, [canciones])])] filtrando las canciones que el usuario ya escucha 
 -- Así que también necesitamos un diccionario de usuarios con las canciones que escucha
+
+dictUsCa :: [User] -> Map.Map Int [Song]
 dictUsCa xs = Map.fromList [(id, s) | (User id _ s _ _) <- xs]
 --Entrada: una lista de canciones, una lista de géneros, y un map [(género, [canción])]
+
+dictPorUsuario :: (Foldable t, Ord k, Eq a) => [a] -> t k -> Map.Map k [a] -> [(k, [a])]
 dictPorUsuario xs  g m2
     | Map.null m2 = []
     | elem (fst l) g = ((fst l), (snd l)\\xs): dictPorUsuario xs g (Map.fromList l2)
     | otherwise = dictPorUsuario xs g (Map.fromList l2)
     where (l:l2) =  Map.toList m2
 -- Entrada: map [(usuario, [canción])], map [(usuario, [género])], map [(género, [canción])]
+relMeta :: (Foldable t, Ord k1, Ord k2, Eq a) => Map.Map k1 [a] -> Map.Map k1 (t k2) -> Map.Map k2 [a] -> Map.Map k1 [(k2, [a])]
+
 relMeta m1 m2 m3 = Map.fromList [(u,(dictPorUsuario (m1 Map.! u) (m2 Map.! u) m3)) | u <- uID ]
     where uID = Map.keys m1
 
 -- Construcción de una playist { nameP = género, genresP =[género], artistsP = [], num_tracks = contar tracksP , tracksP = [lista canciones]}
 
+datosPorPlaylist :: [(String, [Song])] -> [Playlist]
 datosPorPlaylist ps = [Playlist { nameP=k, genresP = [k], artistsP = (map (\(Song _ a _ _ _ _ _ _ _ _ _ _ ) -> a) v), num_tracks= (length v), tracksP=(map (\(Song t _ _ _ _ _ _ _ _ _ _ _ ) -> t) v) } | (k, v) <- ps, v/=[]]
+
+parsearFinal :: Map.Map a [(String, [Song])] -> [(a, [Playlist])]
 parsearFinal m = [(u, datosPorPlaylist k) | (u, k) <- Map.toList m]
 
 a = Artist { name = "AA", popularity = 30, genres =["pop"], followers= 3}
